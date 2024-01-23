@@ -83,7 +83,7 @@ if (responseFromLoginApiN8n.status_code == 200) :
                 "email":emailUser[i],
                 "password":password,
                 "full_name": firstName + " " + lastName,
-                "roles" : ["marketer"]
+                "roles" : ["developer"],
             }
         
     
