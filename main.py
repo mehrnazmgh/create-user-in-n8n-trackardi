@@ -43,7 +43,7 @@ if (responseFromLoginApiN8n.status_code == 200) :
     n8nAuthCookie = responseFromLoginApiN8n.cookies.get('n8n-auth')
 
     # read data from excel file 
-    mainDf = pd.read_excel(r'C:\Users\p30-1\Desktop\pythonProject\creat-user\users.xlsx')
+    mainDf = pd.read_excel(r'.\users.xlsx')
     # get required values
     firstNameUser=mainDf['firstName']
     lastNameUser=mainDf['lastName']
@@ -58,6 +58,8 @@ if (responseFromLoginApiN8n.status_code == 200) :
         ]
         # response from create user api n8n
         responseFromCreateUserApiN8n= requests.post(n8nBaseUrl+'/rest/users', json= dataLoginN8nUser ,headers={'Cookie':'n8n-auth='+n8nAuthCookie})
+        
+        logging.debug('{} in n8n is created.'.format(emailUser[i]))
         
         # required values for register user in n8n
         firstName = firstNameUser[i]
@@ -74,7 +76,7 @@ if (responseFromLoginApiN8n.status_code == 200) :
         
         # print("n8n = " + str(responseFromRegisterUserApiN8n))
         
-        logging.debug('{} in n8n is created'.format(emailUser[i]))
+        logging.debug('{} in n8n is created(registered)'.format(emailUser[i]))
         
         # save login cookies
         accessTokenTrackardi = responseFromLoginApiTrackardi.json()['access_token']
@@ -94,8 +96,8 @@ if (responseFromLoginApiN8n.status_code == 200) :
         # print("trackardi = " + str(responseFromCreateUserApiTrackardi))
         
         #export user password to excel
-        mainDf["password"][i] = password
-        mainDf.to_excel(r'C:\Users\p30-1\Desktop\pythonProject\creat-user\users.xlsx', index=False)
+        mainDf.loc[i, "password"] = password
+        mainDf.to_excel(r'.\users.xlsx', index=False)
         
         logging.debug('{} in Trackardi is created'.format(emailUser[i]))
        
