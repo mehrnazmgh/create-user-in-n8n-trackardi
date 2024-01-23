@@ -5,7 +5,7 @@ import string
 import logging
 
 # Configure the logging settings
-logging.basicConfig(filename='app.log', filemode='w',level=logging.DEBUG,
+logging.basicConfig(filename='app.log', filemode='a',level=logging.DEBUG, 
                     format='%(asctime)s - %(levelname)s - %(message)s')
 
 
@@ -59,51 +59,61 @@ if (responseFromLoginApiN8n.status_code == 200) :
         # response from create user api n8n
         responseFromCreateUserApiN8n= requests.post(n8nBaseUrl+'/rest/users', json= dataLoginN8nUser ,headers={'Cookie':'n8n-auth='+n8nAuthCookie})
         
-        logging.debug('{} in n8n is created.'.format(emailUser[i]))
+        #check the users not repetitive in n8n
+        if(not responseFromCreateUserApiN8n.json()['data']) :
+            print("user with email {} has been accepted already in n8n".format(emailUser[i]))
         
-        # required values for register user in n8n
-        firstName = firstNameUser[i]
-        lastName=lastNameUser[i]
-        password = passwordGenerator()
-        inviterId = "9301e4a2-b1c9-4c5a-bd2f-ea9575fe8013"
-        userId = responseFromCreateUserApiN8n.json()['data'][0]['user']['id']
-        responseFromRegisterUserApiN8n= requests.post("https://app.flowto.ir/rest/users/" + userId, json = {
-        "firstName": firstName,
-        "lastName": lastName,
-        "password" : password,
-        "inviterId": inviterId
-        })
-        
-        # print("n8n = " + str(responseFromRegisterUserApiN8n))
-        
-        logging.debug('{} in n8n is created(registered)'.format(emailUser[i]))
-        
-        # save login cookies
-        accessTokenTrackardi = responseFromLoginApiTrackardi.json()['access_token']
-        
-        dataLoginTrackardi = {
-                "email":emailUser[i],
-                "password":password,
-                "full_name": firstName + " " + lastName,
-                "roles" : ["developer"],
-            }
-        
-    
-        #response from create user api trackardi
-        responseFromCreateUserApiTrackardi= requests.post(trackardiBaseUrl+'/user', json= dataLoginTrackardi
-        ,headers={'Authorization':'bearer '+accessTokenTrackardi})
-        
-        # print("trackardi = " + str(responseFromCreateUserApiTrackardi))
-        
-        #export user password to excel
-        mainDf.loc[i, "password"] = password
-        mainDf.to_excel(r'.\users.xlsx', index=False)
-        
-        logging.debug('{} in Trackardi is created'.format(emailUser[i]))
+        else :
+            logging.debug('{} in n8n is created.'.format(emailUser[i]))
+            
+            # required values for register user in n8n
+            firstName = firstNameUser[i]
+            lastName=lastNameUser[i]
+            password = passwordGenerator()
+            inviterId = "9301e4a2-b1c9-4c5a-bd2f-ea9575fe8013"
+            userId = responseFromCreateUserApiN8n.json()['data'][0]['user']['id']
+            responseFromRegisterUserApiN8n= requests.post("https://app.flowto.ir/rest/users/" + userId, json = {
+            "firstName": firstName,
+            "lastName": lastName,
+            "password" : password,
+            "inviterId": inviterId
+            })
+            
+            logging.debug('{} in n8n is created(registered)'.format(emailUser[i]))
+            
+            if (responseFromLoginApiTrackardi.status_code == 200):
+            
+                # save login cookies
+                accessTokenTrackardi = responseFromLoginApiTrackardi.json()['access_token']
+                
+                dataLoginTrackardi = {
+                        "email":emailUser[i],
+                        "password":password,
+                        "full_name": firstName + " " + lastName,
+                        "roles" : ["developer"],
+                    }
+                
+            
+                #response from create user api trackardi
+                responseFromCreateUserApiTrackardi= requests.post(trackardiBaseUrl+'/user', json= dataLoginTrackardi
+                ,headers={'Authorization':'bearer '+accessTokenTrackardi})
+                
+                #check the users not repetitive in Trackardi
+                if(responseFromCreateUserApiTrackardi.status_code == 409) : 
+                    print("user with email {} already exists in Trackardi".format(emailUser[i]))
+                   
+                else :   
+                    #export user password to excel
+                    mainDf.loc[i, "password"] = password
+                    mainDf.to_excel(r'.\users.xlsx', index=False)
+                    
+                    logging.debug('{} in Trackardi is created'.format(emailUser[i]))
        
-        
-else : 
-  print ("Something went wrong!!!")  
+    
+    
+
+    
+
 
 
 
