@@ -1,75 +1,108 @@
 import requests
 import pandas as pd
+import random
+import string
+import logging
 
-n8n_base_url = 'https://app.flowto.ir'
-trackardi_base_url = 'https://data-api.flowto.ir'
+# Configure the logging settings
+logging.basicConfig(filename='app.log', filemode='w',level=logging.DEBUG,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 
-data_login_admin_n8n = [
-        {
+
+# password generation method
+def passwordGenerator():
+    passwordLength = 8
+    characters = string.ascii_letters + string.digits
+    password = "".join(random.choice(characters) for i in range(passwordLength))
+    return password
+
+
+# base urls
+n8nBaseUrl = 'https://app.flowto.ir'
+trackardiBaseUrl = 'https://data-api.flowto.ir'
+
+# login admin in n8n
+dataLoginAdminN8n = {
     "email": "reza.abi69@gmail.com",
     "password": "PvgE6h9AHk8TVVB"
-        }
-    ]
+}
+responseFromLoginApiN8n= requests.post(n8nBaseUrl+'/rest/login', json = dataLoginAdminN8n)
 
-# response_from_login_api n8n
-response_from_login_api_n8n= requests.post(n8n_base_url+'/rest/login', json = data_login_admin_n8n)
-
-if (response_from_login_api_n8n.status_code == 200) :
-    
-    # save login cookies
-    n8n_auth = response_from_login_api_n8n.cookies.get('n8n-auth')
-    
-    data_login_n8n = [
-        {
-            "email": "pythonUser1@gmail.com"
+# login admin in trackardi 
+dataLoginAdminTrackardi =  {
+            "username": "t.alireza99@gmail.com",
+            "password": "44616518Ab"
         }
-    ]
     
-    #response_from_create_user_api n8n
-    response_from_create_user_api_n8n= requests.post(n8n_base_url+'/rest/users', json= data_login_n8n ,headers={'Cookie':'n8n-auth='+n8n_auth})
-    
-    print(response_from_create_user_api_n8n.text)
-      
-else : 
-  print ("Something went wrong!!!")
-  
-data_login_admin_trackardi = [
-        {
-    "username": "t.alireza99@gmail.com",
-    "password": "44616518Ab"
-        }
-    ]
-   
-main_df = pd.read_excel(r'C:\Users\p30-1\Desktop\pythonProject\creat user\file1.xlsx')
-main_phones=main_df['phone']
-# print (main_phones)
-input_df = pd.read_excel(r'C:\Users\p30-1\Desktop\pythonProject\creat user\file1.xlsx')
-input_phones=input_df['phone']
-
-# response_from_login_api trackardi
-response_from_login_api_trackardi= requests.post(trackardi_base_url +'/user/token', data= data_login_admin_trackardi
+responseFromLoginApiTrackardi= requests.post(trackardiBaseUrl +'/user/token', data= dataLoginAdminTrackardi
 , headers={'Content-Type' : 'application/x-www-form-urlencoded'})
 
 
-if (response_from_login_api_trackardi.status_code == 200) :
-    
+if (responseFromLoginApiN8n.status_code == 200) :
     # save login cookies
-    access_token_trackardi = response_from_login_api_trackardi.json()['access_token']
-    
-    data_login_trackardi = [
-        {
-    "email":"mehrnazmgh@gmail.com",
-    "password":"mehrnaz@74",
-    "full_name": "mehrnaz gheshmpour",
-    "roles" : ["marketer"]
-       }
-    ]
-    
-    #response_from_create_user_api trackardi
-    response_from_create_user_api_trackardi= requests.post(trackardi_base_url+'/user', json= data_login_trackardi
-    ,headers={'Authorization':'bearer '+access_token_trackardi})
+    n8nAuthCookie = responseFromLoginApiN8n.cookies.get('n8n-auth')
 
-    print(response_from_create_user_api_trackardi.text)
+    # read data from excel file 
+    mainDf = pd.read_excel(r'C:\Users\p30-1\Desktop\pythonProject\creat-user\users.xlsx')
+    # get required values
+    firstNameUser=mainDf['firstName']
+    lastNameUser=mainDf['lastName']
+    emailUser=mainDf['email']
+
+    # iterate excel file
+    for i in range(len(mainDf)):
+        dataLoginN8nUser = [
+            {
+                "email": emailUser[i]
+            }
+        ]
+        # response from create user api n8n
+        responseFromCreateUserApiN8n= requests.post(n8nBaseUrl+'/rest/users', json= dataLoginN8nUser ,headers={'Cookie':'n8n-auth='+n8nAuthCookie})
+        
+        # required values for register user in n8n
+        firstName = firstNameUser[i]
+        lastName=lastNameUser[i]
+        password = passwordGenerator()
+        inviterId = "9301e4a2-b1c9-4c5a-bd2f-ea9575fe8013"
+        userId = responseFromCreateUserApiN8n.json()['data'][0]['user']['id']
+        responseFromRegisterUserApiN8n= requests.post("https://app.flowto.ir/rest/users/" + userId, json = {
+        "firstName": firstName,
+        "lastName": lastName,
+        "password" : password,
+        "inviterId": inviterId
+        })
+        
+        # print("n8n = " + str(responseFromRegisterUserApiN8n))
+        
+        logging.debug('{} in n8n is created'.format(emailUser[i]))
+        
+        # save login cookies
+        accessTokenTrackardi = responseFromLoginApiTrackardi.json()['access_token']
+        
+        dataLoginTrackardi = {
+                "email":emailUser[i],
+                "password":password,
+                "full_name": firstName + " " + lastName,
+                "roles" : ["marketer"]
+            }
+        
     
+        #response from create user api trackardi
+        responseFromCreateUserApiTrackardi= requests.post(trackardiBaseUrl+'/user', json= dataLoginTrackardi
+        ,headers={'Authorization':'bearer '+accessTokenTrackardi})
+        
+        # print("trackardi = " + str(responseFromCreateUserApiTrackardi))
+        
+        #export user password to excel
+        mainDf["password"][i] = password
+        mainDf.to_excel(r'C:\Users\p30-1\Desktop\pythonProject\creat-user\users.xlsx', index=False)
+        
+        logging.debug('{} in Trackardi is created'.format(emailUser[i]))
+       
+        
 else : 
-  print ("Something went wrong!!!")    
+  print ("Something went wrong!!!")  
+
+
+
+
