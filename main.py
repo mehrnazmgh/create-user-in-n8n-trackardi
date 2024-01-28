@@ -20,6 +20,7 @@ def passwordGenerator():
 # base urls
 n8nBaseUrl = 'https://app.flowto.ir'
 trackardiBaseUrl = 'https://data-api.flowto.ir'
+kavenegarBaseUrl = 'https://api.kavenegar.com'
 
 # login admin in n8n
 dataLoginAdminN8n = {
@@ -48,6 +49,7 @@ if (responseFromLoginApiN8n.status_code == 200) :
     firstNameUser=mainDf['firstName']
     lastNameUser=mainDf['lastName']
     emailUser=mainDf['email']
+    phoneUser=mainDf['phone']
 
     # iterate excel file
     for i in range(len(mainDf)):
@@ -64,6 +66,7 @@ if (responseFromLoginApiN8n.status_code == 200) :
             print("user with email {} has been accepted already in n8n".format(emailUser[i]))
         
         else :
+            
             logging.debug('{} in n8n is created.'.format(emailUser[i]))
             
             # required values for register user in n8n
@@ -110,9 +113,17 @@ if (responseFromLoginApiN8n.status_code == 200) :
                     logging.debug('{} in Trackardi is created'.format(emailUser[i]))
        
     
-    
+                #response from send sms with kave negar
+                tokenKavenegar = '7571313234546652435734733746664F316130664C30326153704A7436384C2B'
+                messageKavenegar = 'your username = {} and your password = {} .'.format(emailUser[i] , password[i])
+                responseFromSendSmsApiKavenegar =requests.get(kavenegarBaseUrl + '/v1/' + tokenKavenegar + '/sms/send.json?receptor=' + phoneUser[i]+ '&sender=10004624&message=' + messageKavenegar , json=
+                {'receptor':phoneUser[i] ,
+                 'sender':10004624 ,
+                 'message': messageKavenegar
+                }
+                )
 
-    
+                print(responseFromSendSmsApiKavenegar)
 
 
 
