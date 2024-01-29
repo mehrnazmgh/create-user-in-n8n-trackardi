@@ -4,6 +4,7 @@ import random
 import string
 import logging
 
+
 # Configure the logging settings
 logging.basicConfig(filename='app.log', filemode='a',level=logging.DEBUG, 
                     format='%(asctime)s - %(levelname)s - %(message)s')
@@ -44,7 +45,7 @@ if (responseFromLoginApiN8n.status_code == 200) :
     n8nAuthCookie = responseFromLoginApiN8n.cookies.get('n8n-auth')
 
     # read data from excel file 
-    mainDf = pd.read_excel(r'.\users.xlsx')
+    mainDf = pd.read_excel(r'./users.xlsx')
     # get required values
     firstNameUser=mainDf['firstName']
     lastNameUser=mainDf['lastName']
@@ -75,7 +76,7 @@ if (responseFromLoginApiN8n.status_code == 200) :
             password = passwordGenerator()
             inviterId = "9301e4a2-b1c9-4c5a-bd2f-ea9575fe8013"
             userId = responseFromCreateUserApiN8n.json()['data'][0]['user']['id']
-            responseFromRegisterUserApiN8n= requests.post("https://app.flowto.ir/rest/users/" + userId, json = {
+            responseFromRegisterUserApiN8n= requests.post(n8nBaseUrl + "/rest/users/" + userId, json = {
             "firstName": firstName,
             "lastName": lastName,
             "password" : password,
@@ -107,23 +108,18 @@ if (responseFromLoginApiN8n.status_code == 200) :
                    
                 else :   
                     #export user password to excel
-                    mainDf.loc[i, "password"] = password
+                    mainDf.loc[i, "password"] = str(password)
                     mainDf.to_excel(r'.\users.xlsx', index=False)
                     
                     logging.debug('{} in Trackardi is created'.format(emailUser[i]))
-       
-    
-                #response from send sms with kave negar
-                tokenKavenegar = '7571313234546652435734733746664F316130664C30326153704A7436384C2B'
-                messageKavenegar = 'your username = {} and your password = {} .'.format(emailUser[i] , password[i])
-                responseFromSendSmsApiKavenegar =requests.get(kavenegarBaseUrl + '/v1/' + tokenKavenegar + '/sms/send.json?receptor=' + phoneUser[i]+ '&sender=10004624&message=' + messageKavenegar , json=
-                {'receptor':phoneUser[i] ,
-                 'sender':10004624 ,
-                 'message': messageKavenegar
-                }
-                )
-
-                print(responseFromSendSmsApiKavenegar)
+                        
+                    #response from send sms with kave negar
+                    tokenKavenegar = '7571313234546652435734733746664F316130664C30326153704A7436384C2B'
+                    responseFromSendSmsApiKavenegar =requests.post(kavenegarBaseUrl + '/v1/' + str(tokenKavenegar) + '/sms/send.json?receptor=' + str(phoneUser[i])+ '&sender=10004624&message= your username is your email and your password = ' + str(password))
+                    
+                    print(responseFromSendSmsApiKavenegar.status_code)
+        
+                    logging.debug('send username and password whit sms')
 
 
 

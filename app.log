@@ -1,66 +1,40 @@
-2024-01-23 16:22:02,256 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
-2024-01-23 16:22:03,407 - DEBUG - https://app.flowto.ir:443 "POST /rest/login HTTP/1.1" 200 None
-2024-01-23 16:22:03,407 - DEBUG - Starting new HTTPS connection (1): data-api.flowto.ir:443
-2024-01-23 16:22:03,952 - DEBUG - https://data-api.flowto.ir:443 "POST /user/token HTTP/1.1" 200 None
-2024-01-23 16:22:04,222 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
-2024-01-23 16:22:04,746 - DEBUG - https://app.flowto.ir:443 "POST /rest/users HTTP/1.1" 200 None
-2024-01-23 16:22:04,746 - DEBUG - example6@gmail.com in n8n is created.
-2024-01-23 16:22:04,746 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
-2024-01-23 16:22:06,029 - DEBUG - https://app.flowto.ir:443 "POST /rest/users/07931756-3a37-4b48-a8c5-88ed3c3d2a7f HTTP/1.1" 200 None
-2024-01-23 16:22:06,029 - DEBUG - example6@gmail.com in n8n is created(registered)
-2024-01-23 16:22:06,029 - DEBUG - Starting new HTTPS connection (1): data-api.flowto.ir:443
-2024-01-23 16:22:06,534 - DEBUG - https://data-api.flowto.ir:443 "POST /user HTTP/1.1" 200 70
-2024-01-23 16:22:06,581 - DEBUG - example6@gmail.com in Trackardi is created
-2024-01-23 16:22:06,581 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
-2024-01-23 16:22:07,086 - DEBUG - https://app.flowto.ir:443 "POST /rest/users HTTP/1.1" 200 None
-2024-01-23 16:22:07,106 - DEBUG - example2@gmail.com in n8n is created.
-2024-01-23 16:22:07,106 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
-2024-01-23 16:22:08,263 - DEBUG - https://app.flowto.ir:443 "POST /rest/users/5d84eac7-9fa5-41d1-a02a-9a5ccb5f1dd3 HTTP/1.1" 200 None
-2024-01-23 16:22:08,268 - DEBUG - example2@gmail.com in n8n is created(registered)
-2024-01-23 16:22:08,270 - DEBUG - Starting new HTTPS connection (1): data-api.flowto.ir:443
-2024-01-23 16:22:08,793 - DEBUG - https://data-api.flowto.ir:443 "POST /user HTTP/1.1" 200 70
-2024-01-23 16:22:08,824 - DEBUG - example2@gmail.com in Trackardi is created
-2024-01-23 16:28:44,255 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
-2024-01-23 16:28:46,013 - DEBUG - https://app.flowto.ir:443 "POST /rest/login HTTP/1.1" 200 None
-2024-01-23 16:28:46,016 - DEBUG - Starting new HTTPS connection (1): data-api.flowto.ir:443
-2024-01-23 16:28:46,982 - DEBUG - https://data-api.flowto.ir:443 "POST /user/token HTTP/1.1" 200 None
-2024-01-23 16:28:47,584 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
-2024-01-23 16:28:48,642 - DEBUG - https://app.flowto.ir:443 "POST /rest/users HTTP/1.1" 200 None
-2024-01-23 16:28:48,642 - DEBUG - example6@gmail.com in n8n is created.
-2024-01-23 16:28:48,642 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
-2024-01-23 16:28:49,677 - DEBUG - https://app.flowto.ir:443 "POST /rest/users/1eb7956b-3185-498d-a41e-54607e885fc2 HTTP/1.1" 400 None
-2024-01-23 16:28:49,679 - DEBUG - example6@gmail.com in n8n is created(registered)
-2024-01-23 16:28:49,683 - DEBUG - Starting new HTTPS connection (1): data-api.flowto.ir:443
-2024-01-23 16:28:50,642 - DEBUG - https://data-api.flowto.ir:443 "POST /user HTTP/1.1" 200 70
-2024-01-23 16:28:50,673 - DEBUG - example6@gmail.com in Trackardi is created
-2024-01-23 16:28:50,688 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
-2024-01-23 16:28:51,694 - DEBUG - https://app.flowto.ir:443 "POST /rest/users HTTP/1.1" 200 None
-2024-01-23 16:28:51,694 - DEBUG - example2@gmail.com in n8n is created.
-2024-01-23 16:28:51,694 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
-2024-01-23 16:28:53,555 - DEBUG - https://app.flowto.ir:443 "POST /rest/users/992376a1-fe72-451f-80e7-b6bf82035553 HTTP/1.1" 200 None
-2024-01-23 16:28:53,559 - DEBUG - example2@gmail.com in n8n is created(registered)
-2024-01-23 16:28:53,559 - DEBUG - Starting new HTTPS connection (1): data-api.flowto.ir:443
-2024-01-23 16:28:54,524 - DEBUG - https://data-api.flowto.ir:443 "POST /user HTTP/1.1" 200 70
-2024-01-23 16:28:54,569 - DEBUG - example2@gmail.com in Trackardi is created
-2024-01-23 16:29:58,970 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
-2024-01-23 16:30:00,647 - DEBUG - https://app.flowto.ir:443 "POST /rest/login HTTP/1.1" 200 None
-2024-01-23 16:30:00,647 - DEBUG - Starting new HTTPS connection (1): data-api.flowto.ir:443
-2024-01-23 16:30:01,740 - DEBUG - https://data-api.flowto.ir:443 "POST /user/token HTTP/1.1" 200 None
-2024-01-23 16:30:01,993 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
-2024-01-23 16:30:02,988 - DEBUG - https://app.flowto.ir:443 "POST /rest/users HTTP/1.1" 200 None
-2024-01-23 16:30:02,988 - DEBUG - example6@gmail.com in n8n is created.
-2024-01-23 16:30:02,988 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
-2024-01-23 16:30:04,677 - DEBUG - https://app.flowto.ir:443 "POST /rest/users/15d23bd0-3e94-496b-bddf-19399309b84d HTTP/1.1" 200 None
-2024-01-23 16:30:04,677 - DEBUG - example6@gmail.com in n8n is created(registered)
-2024-01-23 16:30:04,677 - DEBUG - Starting new HTTPS connection (1): data-api.flowto.ir:443
-2024-01-23 16:30:05,599 - DEBUG - https://data-api.flowto.ir:443 "POST /user HTTP/1.1" 200 70
-2024-01-23 16:30:05,646 - DEBUG - example6@gmail.com in Trackardi is created
-2024-01-23 16:30:05,662 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
-2024-01-23 16:30:06,713 - DEBUG - https://app.flowto.ir:443 "POST /rest/users HTTP/1.1" 200 None
-2024-01-23 16:30:06,716 - DEBUG - example2@gmail.com in n8n is created.
-2024-01-23 16:30:06,717 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
-2024-01-23 16:30:08,345 - DEBUG - https://app.flowto.ir:443 "POST /rest/users/c484812e-6b84-4d9e-9dd7-ac9ffbc72b94 HTTP/1.1" 200 None
-2024-01-23 16:30:08,351 - DEBUG - example2@gmail.com in n8n is created(registered)
-2024-01-23 16:30:08,356 - DEBUG - Starting new HTTPS connection (1): data-api.flowto.ir:443
-2024-01-23 16:30:09,266 - DEBUG - https://data-api.flowto.ir:443 "POST /user HTTP/1.1" 200 70
-2024-01-23 16:30:09,324 - DEBUG - example2@gmail.com in Trackardi is created
+2024-01-29 11:53:17,758 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
+2024-01-29 11:53:19,161 - DEBUG - https://app.flowto.ir:443 "POST /rest/login HTTP/1.1" 200 None
+2024-01-29 11:53:19,161 - DEBUG - Starting new HTTPS connection (1): data-api.flowto.ir:443
+2024-01-29 11:53:19,789 - DEBUG - https://data-api.flowto.ir:443 "POST /user/token HTTP/1.1" 200 None
+2024-01-29 11:53:20,164 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
+2024-01-29 11:53:20,751 - DEBUG - https://app.flowto.ir:443 "POST /rest/users HTTP/1.1" 200 None
+2024-01-29 11:53:20,751 - DEBUG - example6@gmail.com in n8n is created.
+2024-01-29 11:53:20,761 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
+2024-01-29 11:53:21,892 - DEBUG - https://app.flowto.ir:443 "POST /rest/users/7a115e6b-af9c-4970-8cc7-7eaa4cf66a9c HTTP/1.1" 200 None
+2024-01-29 11:53:21,892 - DEBUG - example6@gmail.com in n8n is created(registered)
+2024-01-29 11:53:21,903 - DEBUG - Starting new HTTPS connection (1): data-api.flowto.ir:443
+2024-01-29 11:53:22,390 - DEBUG - https://data-api.flowto.ir:443 "POST /user HTTP/1.1" 200 70
+2024-01-29 11:54:13,117 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
+2024-01-29 11:54:14,276 - DEBUG - https://app.flowto.ir:443 "POST /rest/login HTTP/1.1" 200 None
+2024-01-29 11:54:14,279 - DEBUG - Starting new HTTPS connection (1): data-api.flowto.ir:443
+2024-01-29 11:54:14,810 - DEBUG - https://data-api.flowto.ir:443 "POST /user/token HTTP/1.1" 200 None
+2024-01-29 11:54:15,039 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
+2024-01-29 11:54:15,557 - DEBUG - https://app.flowto.ir:443 "POST /rest/users HTTP/1.1" 200 None
+2024-01-29 11:54:15,557 - DEBUG - example6@gmail.com in n8n is created.
+2024-01-29 11:54:15,557 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
+2024-01-29 11:54:16,684 - DEBUG - https://app.flowto.ir:443 "POST /rest/users/fb79b498-6dfd-42be-b890-a02479c0c8f9 HTTP/1.1" 200 None
+2024-01-29 11:54:16,684 - DEBUG - example6@gmail.com in n8n is created(registered)
+2024-01-29 11:54:16,684 - DEBUG - Starting new HTTPS connection (1): data-api.flowto.ir:443
+2024-01-29 11:54:17,171 - DEBUG - https://data-api.flowto.ir:443 "POST /user HTTP/1.1" 200 70
+2024-01-29 11:54:17,201 - DEBUG - example6@gmail.com in Trackardi is created
+2024-01-29 11:54:17,201 - DEBUG - Starting new HTTPS connection (1): api.kavenegar.com:443
+2024-01-29 11:54:17,793 - DEBUG - https://api.kavenegar.com:443 "POST /v1/7571313234546652435734733746664F316130664C30326153704A7436384C2B/sms/send.json?receptor=9381088235&sender=10004624&message=%20your%20username%20is%20your%20email%20and%20your%20password%20=%204kTWgnoA HTTP/1.1" 200 282
+2024-01-29 11:54:17,793 - DEBUG - send username and password whit sms
+2024-01-29 11:54:17,793 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
+2024-01-29 11:54:18,302 - DEBUG - https://app.flowto.ir:443 "POST /rest/users HTTP/1.1" 200 None
+2024-01-29 11:54:18,302 - DEBUG - example2@gmail.com in n8n is created.
+2024-01-29 11:54:18,302 - DEBUG - Starting new HTTPS connection (1): app.flowto.ir:443
+2024-01-29 11:54:19,580 - DEBUG - https://app.flowto.ir:443 "POST /rest/users/b8ebd248-218f-4769-a6e0-77a377703557 HTTP/1.1" 200 None
+2024-01-29 11:54:19,580 - DEBUG - example2@gmail.com in n8n is created(registered)
+2024-01-29 11:54:19,580 - DEBUG - Starting new HTTPS connection (1): data-api.flowto.ir:443
+2024-01-29 11:54:20,053 - DEBUG - https://data-api.flowto.ir:443 "POST /user HTTP/1.1" 200 70
+2024-01-29 11:54:20,073 - DEBUG - example2@gmail.com in Trackardi is created
+2024-01-29 11:54:20,073 - DEBUG - Starting new HTTPS connection (1): api.kavenegar.com:443
+2024-01-29 11:54:20,566 - DEBUG - https://api.kavenegar.com:443 "POST /v1/7571313234546652435734733746664F316130664C30326153704A7436384C2B/sms/send.json?receptor=9306498871&sender=10004624&message=%20your%20username%20is%20your%20email%20and%20your%20password%20=%207Ab1160p HTTP/1.1" 200 282
+2024-01-29 11:54:20,576 - DEBUG - send username and password whit sms
