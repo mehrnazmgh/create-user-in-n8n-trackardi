@@ -60,7 +60,7 @@ if (responseFromLoginApiN8n.status_code == 200) :
             }
         ]
         # response from create user api n8n
-        responseFromCreateUserApiN8n= requests.post(n8nBaseUrl+'/rest/users', json= dataLoginN8nUser ,headers={'Cookie':'n8n-auth='+n8nAuthCookie})
+        responseFromCreateUserApiN8n= requests.post(n8nBaseUrl+'/rest/invitations', json= dataLoginN8nUser ,headers={'Cookie':'n8n-auth='+n8nAuthCookie})
         
         #check the users not repetitive in n8n
         if(not responseFromCreateUserApiN8n.json()['data']) :
@@ -76,7 +76,7 @@ if (responseFromLoginApiN8n.status_code == 200) :
             password = passwordGenerator()
             inviterId = "9301e4a2-b1c9-4c5a-bd2f-ea9575fe8013"
             userId = responseFromCreateUserApiN8n.json()['data'][0]['user']['id']
-            responseFromRegisterUserApiN8n= requests.post(n8nBaseUrl + "/rest/users/" + userId, json = {
+            responseFromRegisterUserApiN8n= requests.post(n8nBaseUrl + "/rest/invitations/" + userId + '/accept', json = {
             "firstName": firstName,
             "lastName": lastName,
             "password" : password,
@@ -112,7 +112,7 @@ if (responseFromLoginApiN8n.status_code == 200) :
                     mainDf.to_excel(r'.\users.xlsx', index=False)
                     
                     logging.debug('{} in Trackardi is created'.format(emailUser[i]))
-                        
+                    print(responseFromCreateUserApiTrackardi.status_code)   
                     #response from send sms with kave negar
                     tokenKavenegar = '7571313234546652435734733746664F316130664C30326153704A7436384C2B'
                     responseFromSendSmsApiKavenegar =requests.post(kavenegarBaseUrl + '/v1/' + str(tokenKavenegar) + '/sms/send.json?receptor=' + str(phoneUser[i])+ '&sender=10004624&message= your username is your email and your password = ' + str(password))
